@@ -37,6 +37,7 @@ import authenticateToken from './middlewares/authenticateToken';
 
     const apiRouter = express.Router();
     // Routes
+    
     apiRouter.use('/auth', routes.auth);
     apiRouter.use('/register', routes.register);
 
@@ -44,13 +45,13 @@ import authenticateToken from './middlewares/authenticateToken';
     authorizedApiRouter.use('/bidders', authenticateToken, routes.bidder);
     authorizedApiRouter.use('/items', authenticateToken, routes.item);
     authorizedApiRouter.use('/bid', authenticateToken, routes.bid);
+    
 
     app.use('/api', apiRouter);
     app.use('/api', authorizedApiRouter);
+    app.use('/api-doc', routes.swagger);
 
-    app.get('/heathcheck', async (req: Request, res: Response) => {
-        res.status(200).send('heath check OK');
-    });
+    app.get('/api-healthcheck', routes.healthCheck);
 
     app.use(notFoundHandler);
     app.use(errorHandler);

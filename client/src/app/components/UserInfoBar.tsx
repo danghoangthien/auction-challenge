@@ -16,11 +16,10 @@ const UserMail = (): JSX.Element => {
 
 const UserAmount = (): JSX.Element => {
   const [amount, setLocalAmount] = useState();
-  console.log('[UserAmount]amount', amount);
   useEffect(() => {
     bidderAmount.register(setLocalAmount);
   }, []);
-  return <>{amount}</>;
+  return <> Balance: {amount} USD</>;
 };
 
 const UserInfoBar = (): JSX.Element => {

@@ -22,7 +22,7 @@ const LoginForm: React.FC = () => {
       window.location.href = '/home';
     } catch (error: any) {
       console.error('Login failed:', error);
-      message.error(error.response.data);
+      message.error(error.response?.data?.error || error.message);
     }
   };
 

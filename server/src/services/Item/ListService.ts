@@ -2,17 +2,25 @@ import { Repository } from 'sequelize-typescript';
 import Item, { ItemStatus } from '../../sequelizer/models/Item';
 import Auction from '../../sequelizer/models/Auction';
 import Bid from '../../sequelizer/models/Bid';
+import Bidder from '../../sequelizer/models/Bidder';
 import sequelize, { Op } from 'sequelize';
 
 export default class ListItemService {
   private itemRepository: Repository<Item>;
   private auctionRepository: Repository<Auction>;
   private bidRepository: Repository<Bid>;
+  private bidderRepository: Repository<Bidder>;
 
-  constructor(itemRepository: Repository<Item>, auctionRepository: Repository<Auction>, bidRepository: Repository<Bid>) {
+  constructor(
+    itemRepository: Repository<Item>,
+    auctionRepository: Repository<Auction>,
+    bidRepository: Repository<Bid>,
+    bidderRepository: Repository<Bidder>,
+  ) {
     this.itemRepository = itemRepository;
     this.auctionRepository = auctionRepository
     this.bidRepository = bidRepository
+    this.bidderRepository = bidderRepository
   }
 
   async perform(statusFilter?: ItemStatus[]): Promise<any[]> {
@@ -63,12 +71,16 @@ export default class ListItemService {
             order: [['bid_amount', 'DESC']],
           })
         }
+        let current_winner;
+        if (highestBid) {
+          current_winner = await this.bidderRepository.findByPk(highestBid.bidder_id);
+        }
 
         return {
           ...item.dataValues,
           current_auction: currentAuction,
-          //last_auction: lastAuction,
-          highest_bid: highestBid
+          highest_bid: highestBid,
+          current_winner,
         };
       }));
       return itemsWithAuction;
