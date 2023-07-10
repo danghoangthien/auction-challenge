@@ -1,0 +1,15 @@
+FROM node:14.19.1
+
+WORKDIR /app
+
+RUN npm install -g nodemon
+
+COPY package.json yarn*lock ./
+
+RUN yarn
+
+COPY . .
+
+ENV REDIS_HOST=redis
+
+CMD ["yarn", "start"]

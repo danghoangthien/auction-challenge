@@ -1,0 +1,13 @@
+# Dependency directories
+node_modules
+package-lock.json
+
+# dotenv environment variables file
+.env
+.vscode
+.vs
+.idea
+.data
+
+#MAC
+.DS_Store

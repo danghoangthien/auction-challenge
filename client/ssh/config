@@ -1,0 +1,10 @@
+# GitLab.com server
+Host monica.thh.io
+PubkeyAuthentication yes
+IdentityFile ~/.ssh/thien_opskins
+
+Host github.com
+HostName github.com
+User danghoangthien
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_ed25519

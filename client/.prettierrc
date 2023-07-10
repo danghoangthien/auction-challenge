@@ -1,0 +1,20 @@
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^react(.*)$",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^(app\/|appRedux\/|config\/|hook\/|locales\/|services\/|styles\/|types\/|utils\/)",
+    "",
+    "^[./]"],
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+  "importOrderTypeScriptVersion": "5.0.0"
+}
