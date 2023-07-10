@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Button, Table, Tag } from 'antd';
+import { Button, Descriptions, Table, Tag } from 'antd';
+import DescriptionsItem from 'antd/lib/descriptions/Item';
+import styled from 'styled-components';
 
 import PlaceBidButton from '../PlaceBid/PlaceBidButton';
 
@@ -16,6 +18,34 @@ interface ItemListProps {
   items: Item[];
 }
 
+const StyledDescriptions = styled(Descriptions)`
+  .ant-descriptions-view {
+    width: 550px;
+  }
+  .ant-descriptions-item-label {
+    width: 150px;
+  }
+`;
+
+const AuctionData = ({ email = 'None', price }) => {
+  return (
+    <StyledDescriptions column={1} bordered>
+      <DescriptionsItem
+        key="1"
+        label={<span style={{ width: '150px', display: 'inline-block' }}>Current Winner</span>}
+      >
+        {email}
+      </DescriptionsItem>
+      <DescriptionsItem
+        key="2"
+        label={<span style={{ width: '150px', display: 'inline-block' }}>Current Price</span>}
+      >
+        {price} USD
+      </DescriptionsItem>
+    </StyledDescriptions>
+  );
+};
+
 const DataTable: React.FC<ItemListProps> = ({ items }) => {
   console.log('items', items);
   const columns = [
@@ -30,13 +60,15 @@ const DataTable: React.FC<ItemListProps> = ({ items }) => {
       key: 'description',
     },
     {
-      title: 'Current Price',
+      title: 'Auction Data',
       key: 'current_price',
       render: item => {
         if (item.highest_bid) {
-          return <Tag>{item.highest_bid.bid_amount}</Tag>;
+          return (
+            <AuctionData email={item.current_winner?.email} price={item.highest_bid.bid_amount} />
+          );
         } else {
-          return <Tag>{item.initial_price}</Tag>;
+          return <AuctionData price={item.initial_price} />;
         }
       },
     },

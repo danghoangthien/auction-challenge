@@ -1,0 +1,142 @@
+components:
+  schemas:
+    Auction:
+      type: object
+      description: The Auction table represents an auction.
+      properties:
+        auction_id:
+          type: number
+          description: The ID of the auction.
+        item_id:
+          type: number
+          description: The ID of the associated item.
+        start_time:
+          type: string
+          format: date-time
+          description: The start time of the auction.
+        end_time:
+          type: string
+          format: date-time
+          description: The end time of the auction.
+        reserve_price:
+          type: number
+          description: The reserve price of the auction.
+        winner_id:
+          type: number
+          description: The ID of the auction winner.
+        item:
+          $ref: '#/components/schemas/Item'
+        winner:
+          $ref: '#/components/schemas/Bidder'
+      required:
+        - auction_id
+        - item_id
+        - start_time
+        - end_time
+        - reserve_price
+
+    Bid:
+      type: object
+      description: The Bid table represents a bid.
+      properties:
+        bid_id:
+          type: number
+          description: The ID of the bid.
+        auction_id:
+          type: number
+          description: The ID of the associated auction.
+        bidder_id:
+          type: number
+          description: The ID of the bidder who placed the bid.
+        bid_amount:
+          type: number
+          description: The amount of the bid.
+        bid_time:
+          type: string
+          format: date-time
+          description: The time when the bid was placed.
+        memo:
+          type: string
+          description: Additional information or memo for the bid.
+        auction:
+          $ref: '#/components/schemas/Auction'
+        bidder:
+          $ref: '#/components/schemas/Bidder'
+      required:
+        - bid_id
+        - auction_id
+        - bidder_id
+        - bid_amount
+        - bid_time
+        - memo
+
+    Bidder:
+      type: object
+      description: The Bidder table represents a bidder.
+      properties:
+        bidder_id:
+          type: number
+          description: The ID of the bidder.
+        name:
+          type: string
+          description: The name of the bidder.
+        email:
+          type: string
+          description: The email address of the bidder.
+        password:
+          type: string
+          description: The password of the bidder.
+        deposit:
+          type: number
+          description: The deposit amount of the bidder.
+        winningAuctions:
+          type: array
+          description: The auctions won by the bidder.
+          items:
+            $ref: '#/components/schemas/Auction'
+        bids:
+          type: array
+          description: The bids placed by the bidder.
+          items:
+            $ref: '#/components/schemas/Bid'
+      required:
+        - bidder_id
+        - name
+        - email
+        - password
+        - deposit
+
+    Item:
+      type: object
+      description: The Item table represents an item.
+      properties:
+        item_id:
+          type: number
+          description: The ID of the item.
+        title:
+          type: string
+          description: The title of the item.
+        description:
+          type: string
+          description: The description of the item.
+        initial_price:
+          type: number
+          description: The initial price of the item.
+        time_window:
+          type: number
+          description: The time window of the item.
+        status:
+          type: string
+          description: The status of the item.
+        auctions:
+          type: array
+          description: The auctions associated with the item.
+          items:
+            $ref: '#/components/schemas/Auction'
+      required:
+        - item_id
+        - title
+        - description
+        - initial_price
+        - time_window
+        - status

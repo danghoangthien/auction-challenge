@@ -4,6 +4,30 @@ import { generate } from '../services/AuthToken';
 import CheckCredentialService from "../services/Bidder/CheckCredentialService";
 import bidderRepository from "../sequelizer/repositories/BidderRepository";
 
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Log in user.
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful.
+ *       401:
+ *         description: Failed to login. Invalid credentials.
+ */
 export const login = async (req: Request , res: Response): Promise<void | Response> => {
   const { email, password } = req.body;
   const checkCredentail = new CheckCredentialService(bidderRepository);
@@ -24,6 +48,17 @@ export const login = async (req: Request , res: Response): Promise<void | Respon
   }
 }
 
+/**
+ * @swagger
+ * /logout:
+ *   get:
+ *     summary: Log out user.
+ *     tags:
+ *       - Authentication
+ *     responses:
+ *       200:
+ *         description: Logout successful.
+ */
 export const logout = (_: Request, res: Response): void | Response => {
   // Clear the authorization header
   res.setHeader('Authorization', '');

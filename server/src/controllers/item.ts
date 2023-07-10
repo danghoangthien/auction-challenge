@@ -4,6 +4,7 @@ import ListService from './../services/Item/ListService';
 import itemRepository from '../sequelizer/repositories/ItemRepository';
 import auctionRepository from '../sequelizer/repositories/AuctionRepository';
 import bidRepository from '../sequelizer/repositories/BidRepository';
+import bidderRepository from '../sequelizer/repositories/BidderRepository';
 import { ItemStatus } from '../sequelizer/models/Item';
 import sequelize from '../sequelizer/mySequelize';
 import { ItemData } from '../types/ItemData';
@@ -40,7 +41,9 @@ export const listItems = async (req: Request, res: Response): Promise<void | Res
       : [ItemStatus.Available, ItemStatus.InAuction, ItemStatus.Completed];
 
     // Create a new instance of the ListItemService
-    const listItemService = new ListService(itemRepository, auctionRepository, bidRepository);
+    const listItemService = new ListService(
+      itemRepository, auctionRepository, bidRepository, bidderRepository
+      );
 
     // Retrieve the list of items using the ListItemService
     const items = await listItemService.perform(filterStatus);

@@ -1,9 +1,9 @@
-# DeFi
+# Auction system Frontend
 
-## Design
+## Spec & Mockup
 
 ```
-https://www.figma.com/file/44hQSUSlyKlo2l86iOQPo4/WAX-DeFi?node-id=0%3A1
+https://iruuzainc.notion.site/Full-Stack-Coding-Assignment-debdfbb696b64c499eb74f340163dfc9
 ```
 
 ## `.env` file

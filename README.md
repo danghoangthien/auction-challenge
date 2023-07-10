@@ -1,42 +1,28 @@
-# Defi
+# Auction system
+## [About the system specs](ABOUT.md)
 
-## [FrontEnd](server/README.md)
+## [FrontEnd](client/README.md)
 (Default: Frontend will run on PORT : 4000)
 
 ## [BackEnd](server/README.md)
 (Default: Backend will run on PORT : 4001)
 
 ## How To Run Docker
-1. create `.env` file
+1. create `.env` file from `.env.example` file
+
+2. create `auction-microservices` network
 ```
-PORT=4001
-LOG_LEVEL=info
-
-NODE_ENV="production"
-#Client port
-CLIENT_PORT=4000
-
-# Server port
-SERVER_PORT=4001
-
-# Local docker netowrk
-D_SERVICES_NETWORK=wax-microservices
-```
-
-2. create `wax-microservices` network
-```
-docker network create wax-microservices
+docker network create auction-microservices
 ```
 
 3. start docker
 ```
 docker-compose up -d
 ```
-
-### Local development
-
-- Create `.env` if it does not exist. You can find the sample content in here [How To Run Docker](##how-to-run-docker)
-- Create `.env` in both `client` and `server` folder. You can find the sample content in here [.env.example](./.env.example)
+4. Check docker container
+```
+docker ps
+```
 
 **Start docker compose**
 
@@ -46,7 +32,30 @@ docker-compose -f docker-compose.yml -f docker-compose-local.yml build
 docker-compose -f docker-compose.yml -f docker-compose-local.yml up -d
 ```
 
-**Testing**
+## Checking app on browser
 
-- Front-end: http://localhost:4000
-- Back-end: http://locahost:4001/defi/apr
+- Front-end: 
+
+  http://localhost:4000
+
+  http://localhost:4000/login
+
+  http://localhost:4000/register
+
+- Back-end:
+
+  [Healthcheck endpoint] http://locahost:4001/healthcheck
+
+  [Swagger document endpoint] http://locahost:4001/api-doc
+
+  [Api endpoint] http://locahost:4001/api
+
+## Unit Test
+- Front-end
+```
+  [TBD]
+```
+- Back-end
+```
+  docker exec auction_api yarn test
+```

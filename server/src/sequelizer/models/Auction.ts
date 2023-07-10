@@ -1,7 +1,5 @@
 import { Model, Column, ForeignKey, Table, BelongsTo, DataType } from 'sequelize-typescript';
 
-
-
 import Bidder from './Bidder';
 import Item from './Item';
 
@@ -26,6 +24,10 @@ class Auction extends Model {
   @ForeignKey(() => Bidder)
   @Column(DataType.INTEGER)
   winner_id: number;
+  async setWinnerId(winner_id: number): Promise<void> {
+    this.winner_id =  winner_id;
+    await this.save();
+  }
   
   @BelongsTo(() => Item, 'item_id')
   item: Item;

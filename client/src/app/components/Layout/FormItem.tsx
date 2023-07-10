@@ -6,7 +6,7 @@ const FormItem: React.FC<FormItemProps> = ({ children, ...props }) => {
   return (
     <Form.Item
       style={{ display: 'flex', marginBottom: 16 }}
-      labelCol={{ flex: '0 0 120px' }}
+      labelCol={{ flex: '0 0 140px' }}
       wrapperCol={{ flex: '1' }}
       {...props}
     >
