@@ -21,3 +21,4 @@ export const RegisterPage = lazyLoad(
   module => module.default,
   { fallback, chunkName: 'RegisterPage' },
 );
+

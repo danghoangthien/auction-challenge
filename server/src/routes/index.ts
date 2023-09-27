@@ -1,6 +1,7 @@
 import bidder from './bidder';
 import auth from './auth';
 import register from './register';
+import openai from './openai';
 import item from './item';
 import bid from './bid';
 import swagger from './swagger';
@@ -11,6 +12,7 @@ export default {
     bidder,
     auth,
     register,
+    openai,
     item,
     swagger,
     healthCheck,

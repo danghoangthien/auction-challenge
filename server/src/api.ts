@@ -12,9 +12,9 @@ import authenticateToken from './middlewares/authenticateToken';
 
 
 (async () => {
-    await sequelize.sync({
-        alter: true,
-    });
+    // await sequelize.sync({
+    //     alter: true,
+    // });
   
     const app = express();
     // Application-Level Middleware
@@ -40,6 +40,7 @@ import authenticateToken from './middlewares/authenticateToken';
     
     apiRouter.use('/auth', routes.auth);
     apiRouter.use('/register', routes.register);
+    apiRouter.use('/openai', routes.openai);
 
     const authorizedApiRouter = express.Router();
     authorizedApiRouter.use('/bidders', authenticateToken, routes.bidder);

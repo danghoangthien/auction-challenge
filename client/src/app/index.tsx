@@ -17,6 +17,7 @@ import authService from 'services/AuthService';
 import { GlobalStyle } from '../styles/global-styles';
 // CLIENT PAGE
 import { HomePage, LoginPage, RegisterPage } from './pages/Loadable';
+import OpenAiPage from './pages/AppPage/OpenAi';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => (
@@ -39,7 +40,8 @@ export function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
           <PrivateRoute exact path="/" component={HomePage} />
-          <PrivateRoute exact path="/home" component={HomePage} />
+          <Route exact path="/home" component={HomePage} />
+          <Route exact path="/openai" component={OpenAiPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </BrowserRouter>
